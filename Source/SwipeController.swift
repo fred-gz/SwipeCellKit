@@ -367,6 +367,15 @@ extension SwipeController: UIGestureRecognizerDelegate {
         
         return true
     }
+
+    //Fix edge swipe gesture conflict issue
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == panGestureRecognizer && otherGestureRecognizer.isKind(of: UIScreenEdgePanGestureRecognizer.self) {
+            return true
+        }
+        
+        return false
+    }
 }
 
 extension SwipeController: SwipeActionsViewDelegate {
